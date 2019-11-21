@@ -37,12 +37,10 @@ jobs:
           tar cf - "$dir" | zstd - -o "${TARBALL_ROOT}/${dir}.tar.zst"
         done
         popd
-        echo ::set-output name=files::$(ls "${TARBALL_ROOT}/"*.tar.zst)
-    - name: echo outputs
-      run: echo -e ${{ steps.pack.outputs.files }}
     - name: release
       uses: softprops/action-gh-release@v1
       with:
-        files: ${{ steps.pack.outputs.files }}
+        files: |
+          /opt/tars/*.tar.zst
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
