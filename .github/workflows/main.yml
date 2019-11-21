@@ -37,6 +37,6 @@ jobs:
           tar cf - "$dir" | zstd - -o "${TARBALL_ROOT}/${dir}.tar.zst"
         done
         popd
-        echo ::set-output name=files::$(ls "${TARBALL_ROOT}/*.tar.zst")
+        echo ::set-output name=files::$(ls "${TARBALL_ROOT}/"*.tar.zst)
     - name: echo outputs
       run: echo "${{ steps.pack.outputs.files }}"
