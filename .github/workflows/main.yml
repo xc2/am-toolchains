@@ -22,11 +22,17 @@ jobs:
       run: |
         mkdir -p "$TARBALL_ROOT"
         pushd am-toolchains/brcm-arm-hnd
-        ls | grep crosstools | while read dir; do { tar cf - "$dir" | zstd - -o "${TARBALL_ROOT}/${dir}.tar.zst" } done
+        ls | grep crosstools | while read dir; do 
+          tar cf - "$dir" | zstd - -o "${TARBALL_ROOT}/${dir}.tar.zst"
+        done
         popd
         pushd am-toolchains/brcm-arm-sdk
-        ls | grep hndtools | while read dir; do { tar cf - "$dir" | zstd - -o "${TARBALL_ROOT}/${dir}.tar.zst" } done
+        ls | grep hndtools | while read dir; do
+          tar cf - "$dir" | zstd - -o "${TARBALL_ROOT}/${dir}.tar.zst"
+        done
         popd
         pushd asuswrt-merlin/tools/brcm/K26
-        ls | grep hndtools | while read dir; do { tar cf - "$dir" | zstd - -o "${TARBALL_ROOT}/${dir}.tar.zst" } done
+        ls | grep hndtools | while read dir; do
+          tar cf - "$dir" | zstd - -o "${TARBALL_ROOT}/${dir}.tar.zst"
+        done
         popd
