@@ -17,6 +17,7 @@ jobs:
     - name: Install Dependencies
       run: sudo apt install -y zstd
     - name: pack
+      id: pack
       env:
         TARBALL_ROOT: /opt/tars
       run: |
@@ -36,3 +37,6 @@ jobs:
           tar cf - "$dir" | zstd - -o "${TARBALL_ROOT}/${dir}.tar.zst"
         done
         popd
+        echo ::set-output name=files::$(ls "${TARBALL_ROOT}/*.tar.zst")
+    - name: echo outputs
+      run: echo "${{ steps.pack.outputs.files }}"
